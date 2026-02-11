@@ -11,6 +11,7 @@
       <header>
         <h1>Daily Habits Tracker</h1>
         <p id="current-date"></p>
+        <p id="progress"></p>
       </header>
     <main id="app">
       <section id="quote">
@@ -27,6 +28,18 @@
         <h2>Your Progress</h2>
         <p>Progress will be shown here</p>
       </section>
+
+
+      <div id="confirm-modal" class="hidden">
+        <div class="modal-content">
+            <p id="confirm-text"></p>
+            <button id="confirm-yes">Yes</button>
+            <button id="confirm-no">Cancel</button>
+          </div>
+      </div>
+
+
+
     </main>
     <script type="module" src="/src/main.js"></script>
   </body>

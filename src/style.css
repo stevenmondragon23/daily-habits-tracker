@@ -1,12 +1,177 @@
+/* main colors */
+:root {
+  --blue-main: #4a90e2;
+  --blue-soft: #eaf3fc;
+  --green-main: #7bc96f;
+  --yellow-main: #f4d35e;
+  --bg-color: #f8f9fb;
+  --card-bg: #ffffff;
+  --text-main: #333;
+  --text-light: #666;
+}
+
+/* basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* general body styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  padding: 16px;
+}
+
+/* header section */
+header {
+  background: var(--blue-main);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+#current-date {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* daily quote card */
+#quote {
+  background: var(--blue-soft);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* form styles */
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  background: var(--blue-main);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+/* progress text */
+#progress {
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: white;
+}
+
+/* habit completed */
 .completed {
   text-decoration: line-through;
   opacity: 0.6;
+  color: black;
 }
 
+/* list items */
 li {
   list-style: none;
   margin: 8px 0;
   display: flex;
   gap: 8px;
   align-items: center;
+  background: var(--card-bg);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* checkbox color */
+input[type="checkbox"] {
+  accent-color: var(--green-main);
+}
+
+/* delete button */
+li button {
+  margin-left: auto;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+li button:hover {
+  opacity: 0.85;
+}
+
+/* modal background */
+#confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+/* hidden class */
+.hidden {
+  display: none !important;
+}
+
+/* show modal when active */
+#confirm-modal:not(.hidden) {
+  display: flex;
+}
+
+/* modal box */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* error message */
+.error-message {
+  color: red;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+#habits-list li{
+  background-color: #ddd;
+
+}
+
+
+/* tablet layout */
+@media (min-width: 768px) {
+  body {
+    max-width: 700px;
+    margin: auto;
+  }
 }
