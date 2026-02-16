@@ -28,12 +28,22 @@ body {
 
 /* header section */
 header {
-  background: var(--blue-main);
-  color: white;
+  background: var(--card-bg);
+  color: var(--text-light);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
   margin-bottom: 20px;
+  border: 2px solid var(--text-light);
+}
+
+/*STATS*/
+
+#stats p{
+  background-color: var(--card-bg);
+  padding: 10px;
+  border: 2px solid var(--text-light);
+  border-radius: 8px;
 }
 
 header h1 {
@@ -49,8 +59,10 @@ header h1 {
 #quote {
   background: var(--blue-soft);
   padding: 15px;
+  border: 2px solid var(--text-light);
   border-radius: 10px;
   margin-bottom: 20px;
+  color: black;
 }
 
 /* form styles */
@@ -64,13 +76,13 @@ input[type="text"] {
   flex: 1;
   padding: 8px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 2px solid var(--text-light);
 }
 
 button[type="submit"] {
-  background: var(--blue-main);
-  color: white;
-  border: none;
+  background: var(--card-bg);
+  color: var(--text-light);
+  border: 2px solid var(--text-light);
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
@@ -84,14 +96,13 @@ button[type="submit"]:hover {
 #progress {
   margin-bottom: 20px;
   font-weight: 500;
-  color: white;
+  color: var(--text-main);
 }
 
 /* habit completed */
 .completed {
   text-decoration: line-through;
   opacity: 0.6;
-  color: black;
 }
 
 /* list items */
@@ -104,6 +115,7 @@ li {
   background: var(--card-bg);
   padding: 10px;
   border-radius: 8px;
+  border: 2px solid var(--text-light);
 }
 
 /* checkbox color */
@@ -114,16 +126,19 @@ input[type="checkbox"] {
 /* delete button */
 li button {
   margin-left: auto;
-  background: #ff6b6b;
-  color: white;
-  border: none;
+  background: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--text-light);
   padding: 5px 8px;
   border-radius: 6px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 li button:hover {
-  opacity: 0.85;
+  background-color: #c62828;
+  color: white;
 }
 
 /* modal background */
@@ -163,15 +178,100 @@ li button:hover {
 }
 
 #habits-list li{
-  background-color: #ddd;
-
+  background-color: var(--card-bg);
 }
 
 
-/* tablet layout */
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* ======================
+   THEME SYSTEM
+====================== */
+
+body {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* GREEN THEME */
+body.green {
+  --bg-color: #e8f5e9;
+  --card-bg: #ffffff;
+  --text-main: #142c16;
+  --text-light: #123513;
+}
+
+/* BLUE THEME */
+body.blue {
+  --bg-color: #e3f2fd;
+  --card-bg: #ffffff;
+  --text-main: #162c4c;
+  --text-light: #16385f;
+}
+
+/* DARK THEME */
+body.dark {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-main: #e0e0e0;
+  --text-light: #bdbdbd;
+}
+
+
+
+
+
+
+/* desopt layout */
 @media (min-width: 768px) {
   body {
-    max-width: 700px;
     margin: auto;
   }
+
+
+  #app{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  #app>section{
+    margin: 0px 20px;
+    padding: 10px 20px;
+    border: 2px solid var(--text-light);
+  }
+
+
 }
+
+
+
+
+

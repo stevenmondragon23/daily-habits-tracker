@@ -4,6 +4,13 @@ import {
   loadPartial
 } from "./js/utils.mjs";
 
+import {
+  loadPreferences,
+  applyPreferences,
+  initSettingsUI
+} from "./js/settings/settings.mjs";
+
+
 /* =========================
    RENDER HABITS
 ========================= */
@@ -82,6 +89,7 @@ function renderHabits(habits) {
   updateProgress(habits);
 }
 
+
 /* =========================
    SAVE DAILY PROGRESS
 ========================= */
@@ -99,6 +107,7 @@ function saveDailyProgress(habits) {
   saveToLocalStorage("progressData", progressData);
 }
 
+
 /* =========================
    UPDATE PROGRESS UI
 ========================= */
@@ -114,6 +123,7 @@ function updateProgress(habits) {
   progressElement.textContent = `Progress: ${percentage}%`;
 }
 
+
 /* =========================
    QUOTABLE API
 ========================= */
@@ -127,6 +137,7 @@ async function fetchQuote() {
 
     const data = await response.json();
     return `${data.content} — ${data.author}`;
+
   } catch (error) {
     console.error("Quote API error:", error);
     showError("Unable to load motivational quote.");
@@ -135,6 +146,15 @@ async function fetchQuote() {
 }
 
 async function displayQuote() {
+
+  const prefs = loadPreferences();
+
+  if (!prefs.showDailyQuote) {
+    const quoteContainer = document.querySelector("#quote");
+    if (quoteContainer) quoteContainer.style.display = "none";
+    return;
+  }
+
   const quoteText = await fetchQuote();
   const quoteSection = document.querySelector("#quote p");
 
@@ -142,6 +162,7 @@ async function displayQuote() {
     quoteSection.textContent = quoteText;
   }
 }
+
 
 /* =========================
    WORLD TIME API
@@ -165,6 +186,7 @@ async function fetchWorldTime() {
   }
 }
 
+
 /* =========================
    DATE CACHE SYSTEM
 ========================= */
@@ -182,6 +204,7 @@ async function getDateWithCache() {
 
   return dateISO;
 }
+
 
 /* =========================
    RESET DAILY
@@ -203,6 +226,7 @@ function resetHabitsDaily(dateISO) {
   }
 }
 
+
 /* =========================
    DISPLAY DATE
 ========================= */
@@ -221,6 +245,7 @@ function displayCurrentDate(dateISO) {
     dateElement.textContent = formattedDate;
   }
 }
+
 
 /* =========================
    CONFIRM MODAL
@@ -259,6 +284,7 @@ function showConfirmModal(message) {
   });
 }
 
+
 /* =========================
    ERROR HANDLER
 ========================= */
@@ -283,10 +309,17 @@ function showError(message) {
   }, 4000);
 }
 
+
 /* =========================
    INIT
 ========================= */
 async function init() {
+
+  // Load and apply user preferences first
+  const prefs = loadPreferences();
+  applyPreferences(prefs);
+  initSettingsUI();
+
   await loadPartial("#form-container", "/partials/add-habit.html");
 
   await displayQuote();

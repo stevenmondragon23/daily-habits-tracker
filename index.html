@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/style.css">
+    <script type="module" src="/src/main.js"></script>
     <title>Daily Habits Tracker</title>
   </head>
   <body>
@@ -12,6 +13,7 @@
         <h1>Daily Habits Tracker</h1>
         <p id="current-date"></p>
         <p id="progress"></p>
+        <button id="openSettings">⚙</button>
       </header>
     <main id="app">
       <section id="quote">
@@ -30,18 +32,46 @@
       </section>
 
 
-      <div id="confirm-modal" class="hidden">
-        <div class="modal-content">
-            <p id="confirm-text"></p>
-            <button id="confirm-yes">Yes</button>
-            <button id="confirm-no">Cancel</button>
-          </div>
-      </div>
+        <div id="confirm-modal" class="hidden">
+          <div class="modal-content">
+              <p id="confirm-text"></p>
+              <button id="confirm-yes">Yes</button>
+              <button id="confirm-no">Cancel</button>
+            </div>
+        </div>
 
+        <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Settings</h2>
 
+      <label for="themeColor">Theme</label>
+      <select id="themeColor" name="themeColor">
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="dark">Dark</option>
+      </select>
+
+      <label for="fontSize">Font Size</label>
+      <select id="fontSize" name="fontSize">
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+
+      <label for="showDailyQuote">
+        <input type="checkbox" id="showDailyQuote" name="showDailyQuote">
+        Show Daily Quote
+      </label>
+
+      <button id="closeSettings">Close</button>
+    </div>
+  </div>
 
     </main>
-    <script type="module" src="/src/main.js"></script>
+    
   </body>
+
+
+
 </html>
 
