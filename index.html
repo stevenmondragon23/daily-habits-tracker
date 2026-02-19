@@ -1,19 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Track your daily habits, monitor progress, and stay motivated with daily quotes.">
+    
+    
+    
+    <meta name="author" content="Steven Mondragon">
+
+
+      <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    
+    
     <link rel="stylesheet" href="/src/style.css">
     <script type="module" src="/src/main.js"></script>
     <title>Daily Habits Tracker</title>
+    <link rel="icon" href="./public/images/favicon.ico">
+
+
+
+
   </head>
   <body>
     
       <header>
+      <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 24 24"
+       width="50"
+       height="50"
+       fill="currentColor"
+       aria-hidden="true">
+      <path d="M12,24C5.383,24,0,18.617,0,12S5.383,0,12,0s12,5.383,12,12-5.383,12-12,12Zm0-22C6.486,2,2,6.486,2,12s4.486,10,10,10,10-4.486,10-10S17.514,2,12,2Zm5,10c0-.553-.447-1-1-1h-3V6c0-.553-.448-1-1-1s-1,.447-1,1v6c0,.553,.448,1,1,1h4c.553,0,1-.447,1-1Z"/>
+      </svg>
+      <div>
         <h1>Daily Habits Tracker</h1>
         <p id="current-date"></p>
         <p id="progress"></p>
-        <button id="openSettings">⚙</button>
+      </div>
+        <button id="openSettings" aria-label="Open settings">⚙</button>
       </header>
     <main id="app">
       <section id="quote">
@@ -32,17 +60,28 @@
       </section>
 
 
-        <div id="confirm-modal" class="hidden">
+        <div id="confirm-modal"
+        class="hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirm-title">
+        
           <div class="modal-content">
+              <h2 id="confirm-title">Confirmation</h2>
               <p id="confirm-text"></p>
               <button id="confirm-yes">Yes</button>
               <button id="confirm-no">Cancel</button>
-            </div>
+          </div>
         </div>
 
-        <div id="settingsModal" class="modal hidden">
+        <div id="settingsModal"
+        class="modal hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settings-title">
+
     <div class="modal-content">
-      <h2>Settings</h2>
+      <h2 id="settings-title">Settings</h2>
 
       <label for="themeColor">Theme</label>
       <select id="themeColor" name="themeColor">

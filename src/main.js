@@ -21,6 +21,7 @@ function renderHabits(habits) {
   if (habits.length === 0) {
     list.innerHTML = "<li>No habits added yet</li>";
     updateProgress(habits);
+    updateStats(habits);
     return;
   }
 
@@ -87,6 +88,7 @@ function renderHabits(habits) {
   });
 
   updateProgress(habits);
+  updateStats(habits);
 }
 
 
@@ -121,6 +123,42 @@ function updateProgress(habits) {
     : Math.round((completedCount / habits.length) * 100);
 
   progressElement.textContent = `Progress: ${percentage}%`;
+}
+
+
+/* =========================
+   UPDATE STATS SECTION
+========================= */
+function updateStats(habits) {
+  const statsSection = document.querySelector("#stats");
+  if (!statsSection) return;
+
+  const completedToday = habits.filter(h => h.completed).length;
+  const percentToday = habits.length === 0
+    ? 0
+    : Math.round((completedToday / habits.length) * 100);
+
+  const bestStreak = habits.length === 0
+    ? 0
+    : Math.max(...habits.map(h => h.streak || 0));
+
+  const progressData = getFromLocalStorage("progressData") || {};
+  const last7Days = Object.entries(progressData).slice(-7);
+
+  const weeklyAverage = last7Days.length === 0
+    ? 0
+    : Math.round(
+        last7Days.reduce((acc, [, value]) => acc + value, 0) /
+        last7Days.length
+      );
+
+  statsSection.innerHTML = `
+    <h2>Your Progress</h2>
+    <p>Today's completion: <strong>${percentToday}%</strong></p>
+    <progress value="${percentToday}" max="100"></progress>
+    <p>Best streak achieved: <strong>${bestStreak} days 🔥</strong></p>
+    <p>Weekly average completion: <strong>${weeklyAverage}%</strong></p>
+  `;
 }
 
 
@@ -176,12 +214,9 @@ async function fetchWorldTime() {
     }
 
     const data = await response.json();
-    console.log("WorldTime API connected");
-
     return data.datetime;
 
   } catch (error) {
-    console.warn("WorldTime API failed, using local time.");
     return new Date().toISOString();
   }
 }
@@ -195,7 +230,6 @@ async function getDateWithCache() {
   const storedDate = localStorage.getItem("lastApiDate");
 
   if (storedDate === todayLocal) {
-    console.log("Using cached date");
     return new Date().toISOString();
   }
 
@@ -315,7 +349,6 @@ function showError(message) {
 ========================= */
 async function init() {
 
-  // Load and apply user preferences first
   const prefs = loadPreferences();
   applyPreferences(prefs);
   initSettingsUI();
@@ -331,6 +364,7 @@ async function init() {
 
   const habits = getFromLocalStorage("habits") || [];
   renderHabits(habits);
+  updateStats(habits);
 
   const form = document.querySelector("#habit-form");
   const input = document.querySelector("#habit-name");
@@ -343,10 +377,15 @@ async function init() {
       if (!habitName) return;
 
       habits.push({
+        id: Date.now(),
         name: habitName,
+        category: "Health",
+        priority: "Medium",
         completed: false,
         streak: 0,
-        lastCompletedDate: null
+        lastCompletedDate: null,
+        createdAt: new Date().toISOString(),
+        reminderEnabled: false
       });
 
       saveToLocalStorage("habits", habits);

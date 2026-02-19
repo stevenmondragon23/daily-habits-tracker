@@ -19,7 +19,7 @@
 
 /* general body styles */
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Oswald", "Poppins", sans-serif;
   background: var(--bg-color);
   color: var(--text-main);
   line-height: 1.5;
@@ -92,6 +92,36 @@ button[type="submit"]:hover {
   opacity: 0.9;
 }
 
+
+/* ======================
+   FONT SIZE SYSTEM
+====================== */
+
+body.small {
+  font-size: 12px; 
+}
+
+body.medium {
+  font-size: 16px; 
+}
+
+body.large {
+  font-size: 20px; 
+}
+
+body.small * {
+  font-size: 0.875rem; 
+}
+
+body.medium * {
+  font-size: 1rem;
+}
+
+body.large * {
+  font-size: 1.25rem;
+}
+
+
 /* progress text */
 #progress {
   margin-bottom: 20px;
@@ -121,6 +151,53 @@ li {
 /* checkbox color */
 input[type="checkbox"] {
   accent-color: var(--green-main);
+}
+
+
+
+/*ADVANCED AND ANIMATIONS */
+
+li {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#quote {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.modal-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+
+.completed {
+  animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+#habit-form{
+  display: flex;
+  flex-direction: column;
+}
+
+#stats p{
+  margin: 5px 0px;
 }
 
 /* delete button */
@@ -242,6 +319,10 @@ body.dark {
   --text-light: #bdbdbd;
 }
 
+svg {
+  color: var(--text-light);
+  transition: color 0.3s ease;
+}
 
 
 
@@ -266,6 +347,19 @@ body.dark {
     margin: 0px 20px;
     padding: 10px 20px;
     border: 2px solid var(--text-light);
+  }
+
+  header{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+
+  }
+
+  #openSettings{
+    padding: 20px;
   }
 
 
